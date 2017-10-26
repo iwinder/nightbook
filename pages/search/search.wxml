@@ -1,0 +1,75 @@
+<view class="page">
+    <view class="page__hd">
+    <view class="weui-search-bar">
+            <view class="weui-search-bar__form">
+                <view class="weui-search-bar__box">
+                    <icon class="weui-icon-search_in-box" type="search" size="14"></icon>
+                    <input type="text" class="weui-search-bar__input" placeholder="搜索" value="{{inputVal}}" focus="{{inputShowed}}" bindconfirm="inputTyping" /> 
+                    <view class="weui-icon-clear" wx:if="{{inputVal.length > 0}}" bindtap="clearInput">
+                        <icon type="clear" size="14"></icon>
+                    </view>
+                </view>
+                <label class="weui-search-bar__label" hidden="{{inputShowed}}" bindtap="showInput">
+                    <icon class="weui-icon-search" type="search" size="14"></icon>
+                    <view class="weui-search-bar__text">搜索</view>
+                </label>
+            </view>
+            <view class="weui-search-bar__cancel-btn" hidden="{{!inputShowed}}" bindtap="hideInput">取消</view>
+        </view>
+    </view>
+   <view class="weui-cells searchbar-result" wx:if="{{inputVal.length> 0}}"> 
+    <view class="weui-panel weui-panel_access" wx:if="{{books.length > 0}}">
+        <view class="weui-panel__bd">
+            <block wx:for="{{books}}" wx:for-index="idx"  wx:key="*this">
+                <view  class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" data-bid="{{item.bid}}" bindtap="viewTap">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="{{item.headImage}}" />
+                    </view><!-- weui-media-box__hd_in-appmsg end -->
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">{{item.title}}</view>
+                        <view class="weui-media-box__desc">{{item.author}}</view>
+                          <button class="weui-btn mini-btn" type="default" wx:if="{{item.hasStatus ==1 }}"   disabled="true" size="mini">已在书架</button>
+                      <button id="{{idx}}" data-bid="{{item.bid}}" class="weui-btn mini-btn" type="default" wx:else size="mini" catchtap="buttonTap" >加入书架</button>
+                    </view><!-- weui-media-box__bd_in-appmsg end -->
+                </view> <!-- weui-media-box_appmsg end -->
+
+</block>
+                 
+            </view><!-- weui-panel__bd end -->
+
+            </view>  <!-- weui-panel_access end -->
+   </view>  <!--searchbar-result end -->
+</view>
+
+
+
+<!--mask-->  
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>  
+<!--content-->  
+<!--使用animation属性指定需要执行的动画-->  
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">  
+  <!--drawer content-->  
+  <view class="drawer_title"></view>  
+  <view class="drawer_content">  
+     <view class="weui-cell"> 
+      <image  class="book-grid__icon" src='{{addBookObj.info.headImage}}'></image>
+      
+    </view>
+     <view  class='book-cells__tips'>{{addBookObj.info.title}}</view>
+      <view  class='book-cells__tips'>{{addBookObj.info.author}} </view>
+      
+    <!-- <view  class='book-cells__tips'>已加入书架</view>   -->
+   <view class="book-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">阅读状态</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker bindchange="bindReadStatusChange" value="{{readStatusIndex}}" range="{{readStatuss}}">
+                        <view class="weui-select weui-select_in-select-after">{{readStatuss[readStatusIndex]}}</view>
+                    </picker>
+                </view>
+    </view>  
+    
+  </view>  
+  <view class="btn_ok" bindtap="powerDrawer" data-statu="confirm">确定</view>
+</view>  

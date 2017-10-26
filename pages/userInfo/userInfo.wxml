@@ -1,0 +1,41 @@
+<view class="page">
+    <view class="page__bd page__bd_spacing">
+        <view class="weui-flex">
+            <view class="weui-flex__item userinfo">
+            <!-- <view class="placeholder"> -->
+              <image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+               <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+
+            <!-- </view> -->
+            </view>
+        </view>
+        <view class="weui-flex">
+            <view class="weui-flex__item">
+                <navigator url="../statistics/statistics" class="book-grid" data-id='1' hover-class="book-grid_active">
+                    <image class="book-grid__icon"   src="../../image/ico_count.png" />
+                    <view class="book-grid__label">统计</view>
+                </navigator>
+            </view>
+
+
+            <!-- <view class="weui-flex__item">
+            
+             <navigator url="" class="book-grid" data-id='1' hover-class="book-grid_active">
+                    <image class="book-grid__icon"   src="../../image/test_book.jpg" />
+                    <view class="book-grid__label">意见建议</view>
+                </navigator>
+            
+            </view> -->
+
+             <view class="weui-flex__item">
+              <navigator url="../setting/setting" class="book-grid" data-id='1' hover-class="book-grid_active">
+                    <image class="book-grid__icon"   src="../../image/ico_config.png" />
+                    <view class="book-grid__label">设置</view>
+                </navigator>
+             </view>
+        </view>
+       
+     
+
+    </view>
+</view>

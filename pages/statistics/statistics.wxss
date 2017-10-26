@@ -1,0 +1,13 @@
+.placeholder{
+    margin: 5px;
+    padding: 0 10px;
+    text-align: center;
+    height: 5.3em;
+    line-height: 5.3em;
+    color: #ffffff;
+}
+.page__bd{
+   margin: 50vh auto 0;
+    transform: translateY(-50%);
+
+}

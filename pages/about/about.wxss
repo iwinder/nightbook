@@ -1,0 +1,10 @@
+/* pages/about/about.wxss */
+
+.page__title{
+  text-align:center;
+  font-size:1.3rem;
+
+}
+.weui-article__p_url{
+     color: #cfcfcf;
+}

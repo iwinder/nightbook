@@ -1,0 +1,157 @@
+<view class="page">
+
+  <view class="page__hd " >
+ 
+      <view class="weui-flex">
+            <view class="weui-flex__item">
+            <view class="placeholder"> {{readType}}共：{{readNum}}本</view>
+            
+      </view>
+           
+      <view class="weui-flex__item"  >
+          <button  class="placeholder_button" type="primary" data-statu="open" bindtap="open">添加</button>
+      </view>
+      </view>
+  </view>
+
+
+
+
+
+    <view class="page__bd" >
+
+
+       
+ 
+<view class="weui-tab">
+
+
+
+
+            <view class="weui-navbar">
+                <block wx:for="{{tabs}}" wx:key="*this">
+                    <view data-id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+                        <view class="weui-navbar__title">{{item}}</view>
+                    </view>
+                </block>
+                <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);">
+                </view>
+            </view>
+
+
+
+            <view class="weui-tab__panel">
+
+
+                <view class="weui-tab__content" hidden="{{activeIndex != 0}}" >  
+
+      <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}%;"  
+    class="list" bindscrolltolower="bindDownLoadOne" > 
+            <block wx:for="{{readNowObj.readObjs}}" wx:key="*this">
+                <view  class="book-grid" data-id='{{item.id}}'  data-info='{{item}}' bindtap="powerNavDrawer" data-statu="open" hover-class="book-grid_active">
+                    <image class="book-grid__icon"   src="{{item.headImage}}" />
+                    <view class="book-grid__label">{{item.title}} </view>
+                </view>
+            </block>
+        </scroll-view>
+
+                 
+               
+                </view>
+                
+                
+                <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
+                
+                    <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}%;"  
+    class="list" bindscrolltolower="bindDownLoadTwo" > 
+            <block wx:for="{{readNoObj.readObjs}}" wx:key="*this">
+                <view  class="book-grid" data-id='{{item.id}}' data-info='{{item}}' bindtap="powerNavDrawer" data-statu="open" hover-class="book-grid_active">
+                    <image class="book-grid__icon"   src="{{item.headImage}}" />
+                    <view class="book-grid__label">{{item.title}} </view>
+                </view>
+            </block>
+        </scroll-view>
+                
+                </view>
+                
+                
+                <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
+                
+                    <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}%;"  
+    class="list" bindscrolltolower="bindDownLoadThree" > 
+            <block wx:for="{{readFinishObj.readObjs}}" wx:key="*this">
+                <view  class="book-grid" data-id='{{item.id}}' data-info='{{item}}' bindtap="powerNavDrawer" data-statu="open" hover-class="book-grid_active">
+                    <image class="book-grid__icon"   src="{{item.headImage}}" />
+                    <view class="book-grid__label">{{item.title}} </view>
+                </view>
+            </block>
+        </scroll-view>
+
+                </view>
+                
+                <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
+                   <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}%;"  
+    class="list" bindscrolltolower="bindDownLoadFour" > 
+            <block wx:for="{{readAllObj.readObjs}}" wx:key="*this">
+                <view  class="book-grid" data-id='{{item.id}}' data-info='{{item}}' bindtap="powerNavDrawer" data-statu="open" hover-class="book-grid_active">
+                    <image class="book-grid__icon"   src="{{item.headImage}}" />
+                    <view class="book-grid__label">{{item.title}} </view>
+                </view>
+            </block>
+        </scroll-view>
+
+                </view>
+            </view>
+        </view>
+    
+    <!-- page_bd end -->
+    </view>
+    <!-- page end -->
+</view>  
+
+
+<!--mask-->  
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>  
+<!--content-->  
+<!--使用animation属性指定需要执行的动画-->  
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">  
+  <!--drawer content-->  
+  <view class="drawer_title"></view>  
+  <view class="drawer_content">  
+     <view class="weui-cell"> 
+      <image  class="book-grid__icon" src='{{addBookObj.info.headImage}}'></image>
+      
+    </view>
+     <view  class='book-cells__tips'>{{addBookObj.info.title}}</view>
+      <view  class='book-cells__tips'>{{addBookObj.info.author}} </view>
+      
+    <view  class='book-cells__tips'>已加入书架</view>  
+   <view class="book-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">阅读状态</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker bindchange="bindReadStatusChange" value="{{readStatusIndex}}" range="{{readStatuss}}">
+                        <view class="weui-select weui-select_in-select-after">{{readStatuss[readStatusIndex]}}</view>
+                    </picker>
+                </view>
+    </view>  
+    
+  </view>  
+  <view class="btn_ok" bindtap="powerDrawer" data-statu="confirm">确定</view>
+</view>  
+
+
+
+
+
+<view class="drawer_screen" bindtap="powerNavDrawer" data-statu="close" wx:if="{{showNavStatus}}"></view>  
+<!--content-->  
+<!--使用animation属性指定需要执行的动画-->  
+<view animation="{{animationData}}" class="drawer_nav_box" wx:if="{{showNavStatus}}">  
+
+  <!--drawer content-->  
+ <view class="btn_nav" bindtap="lookInfo" data-statu="confirm">查看详情</view>
+ <view class="btn_nav" bindtap="powerDrawer" data-statu="openByNav">更新阅读进度</view>
+
+</view>  
