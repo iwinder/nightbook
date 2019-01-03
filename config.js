@@ -10,7 +10,7 @@ var config = {
     // 登录地址，用于建立会话
     // loginUrl: `https://${host}/login`,
     loginUrl: `${host}/auth/home`,
-    apiUrlhead: `${host}/jsapi/`,
+    apiUrlhead: `${host}/jsapi/mina/`,
     // 测试的请求地址，用于测试会话
     requestUrl: `https://${host}/user`,
 
