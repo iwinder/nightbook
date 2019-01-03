@@ -1,5 +1,6 @@
-var host = 'https://book.windcoder.com/nightbook';
+// var host = 'https://book.windcoder.com/nightbook';
 
+var host = 'http://localhost:8080';
 var config = {
   pid:1,
   // 下面的地址配合云端 Demo 工作
