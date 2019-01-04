@@ -1,13 +1,19 @@
 {
   "pages":[
     "pages/index/index",
-    "pages/userInfo/userInfo"
+    "pages/userInfo/userInfo",
+    "pages/bookInfo/bookInfo",
+    "pages/search/search",
+    "pages/statistics/statistics",
+    "pages/issues/issues",
+    "pages/about/about",
+    "pages/setting/setting"
 
   ],
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
+    "navigationBarTitleText": "深夜书架",
     "navigationBarTextStyle":"black"
   },
   "tabBar": {

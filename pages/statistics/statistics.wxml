@@ -1,0 +1,25 @@
+<view class="Page" style="height:{{pageHieght}}px">
+  <view class="page__bd page__bd_spacing">
+      <view class="weui-flex">
+            <view class="weui-flex__item" >
+            <view class="placeholder" style='background-color:{{colorObj[0]}}'>
+            <text>总计：</text>
+            <text>{{redObj.all.countNum}}本</text>
+            </view></view>
+            <view class="weui-flex__item"><view class="placeholder" style="background-color:{{colorObj[1]}}">
+            <text>在读：</text>
+            <text>{{redObj.now.countNum}}本</text>
+            </view></view>
+        </view> <!--weui-flex end-->
+         <view class="weui-flex">
+            <view class="weui-flex__item" ><view class="placeholder" style='background-color:{{colorObj[2]}}'>
+              <text>已读:</text>
+            <text>{{redObj.finish.countNum}}本</text>
+            </view></view>
+            <view class="weui-flex__item"><view class="placeholder" style="background-color:{{colorObj[3]}}">
+            <text>未读:</text>
+            <text>{{redObj.no.countNum}}本</text>
+            </view></view>
+        </view> <!--weui-flex end-->
+  </view><!--page__bd end-->
+</view> <!--Page end-->

@@ -46,7 +46,7 @@
   padding-top:10vh;
 }
 .weui-tab__content{   
-  height: 100vh; 
+  height: 80vh; 
   overflow:scroll; 
 } 
 

@@ -1,0 +1,67 @@
+.weui-media-box__hd_in-appmsg{
+  height:100px;
+  width:70px;
+
+}
+
+.book-grid__icon{border:1rpx solid #d9d9d9;display:block;width:150rpx;height:200rpx;margin: 0 auto;
+-webkit-box-shadow: 0px 10px 10px rgba(0,0,0,0.3);
+}
+.book-cells__tips {
+margin-top:.3em;
+color:#999;
+padding-left:15px;
+padding-right:15px;
+font-size:14px;
+text-align:center;
+
+}
+.book-cell{
+  padding:10px 15px;
+  position:relative;
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:flex;
+  -webkit-box-align:center;
+  -webkit-align-items:center;
+  align-items:center;
+  text-align:center;
+
+}
+/*mask*/  
+.drawer_screen {  
+  width: 100%;  
+  height: 100%;  
+  position: fixed;  
+  top: 0;  
+  left: 0;  
+  z-index: 1000;  
+  background: #000;  
+  opacity: 0.5;  
+  overflow: hidden;  
+}  
+/*content*/  
+.drawer_box {  
+  width: 550rpx;  
+  overflow: hidden;  
+  position: fixed;  
+  top: 50%;  
+  left: 0;  
+  z-index: 1001;  
+  background: #FAFAFA;  
+  margin: -150px 100rpx 0 100rpx;  
+  border-radius: 3px;  
+}  
+.drawer_title{  
+  padding:15px;  
+  font: 20px "microsoft yahei";  
+  text-align: center;  
+}  
+
+.btn_ok{  
+  padding: 10px;  
+  font: 20px "microsoft yahei";  
+  text-align: center;  
+  border-top: 1px solid #E8E8EA;  
+  color: #3CC51F;  
+}  
