@@ -1,5 +1,5 @@
 var config = require("../../config")
-var wcloud = require("../../lib/index")
+var qyloud = require("../../lib/index")
 
 Page({
 
@@ -92,33 +92,29 @@ Page({
     wx.showLoading({
       title: '提交中',
     })
-    wcloud.request({
+    qyloud.request({
       login: true,
       url: config.service.apiUrlhead + "addIssues",
       data: {
-        issues: that.data.inputVal
+        content: that.data.inputVal
       },
       success: function (res) {
         wx.hideLoading();
-        if (res.data.code>0){
-          wx.showToast({
-            title: "提交成功",
-            duration: 2000
-          });
-          that.setData({
-            inputVal:"",
-            butnFlag: true,
-          });
-        }else{
-          wx.showToast({
-            title: res.data.msg,
-            duration: 2000
-          });
-        }
+        
+        wx.showToast({
+          title: "提交成功",
+          duration: 2000
+        });
+        that.setData({
+          inputVal:"",
+          butnFlag: true,
+        });
+
       },
       fail:function(e){
         wx.showToast({
-          title: e.errMsg,
+          title: e.message,
+          icon: 'none',
           duration: 2000
         })
       }

@@ -31,14 +31,15 @@ Page({
    */
   onLoad: function (options) {
     var that = this;
+    wx.showLoading({
+      title: '加载中',
+    })
     qyloud.request({
       login: true,
       url: config.service.apiUrlhead + "findUserBookNumCount",
       success: function (res) {
-        if(res.data.code>0){
-         
-
-          var datas = res.data.result;
+          wx.hideLoading();
+          var datas = res.data;
           var len = datas.length;
           var tmp = null;
           for(var i=0;i<len;i++){
@@ -61,11 +62,12 @@ Page({
               });
             }
           }
-        }
       },
       fail:function(err){
+        wx.hideLoading();
         wx.showToast({
-          title: err.toString(),
+          title: err.message,
+          icon: 'none',
           duration: 2000
         })
       }

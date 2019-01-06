@@ -18,7 +18,7 @@
             </view>
         </view>
 
-  <view class="weui-cells__hd">   </view>
+    <view class="weui-cells__hd">   </view>
         <view class="weui-flex">
             <view class="weui-flex__item">
             <view class="book_addBtn_view">
@@ -27,9 +27,15 @@
                <span class='iconfont icoAdd_selected'></span> <text class='textAdd_selected'>已在书架</text>
                </view>
               </view>
-              <view class="book_addBtn" bindtap="buttonTap"  wx:else  >
-                <span class='iconfont icoAdd'></span> <text>加入书架</text>
-             </view>
+              <block wx:else>
+                    <view class="book_addBtn" wx:if="{{isAuth}}" bindtap="buttonTap"    >
+                        <span class='iconfont icoAdd'></span> <text>加入书架</text>
+                    </view>
+                     <view class="book_addBtn" wx:elif="{{!isAuth}}"  >
+                       <button class="placeholder_button" type="warn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 加入书架 </button>
+                    </view>
+              </block>
+  
             </view>
             
             </view>
@@ -37,7 +43,7 @@
         </view>
         <view class="weui-cells__title">内容简介</view>
         <view class="weui-flex">
-            <view class="weui-flex__item">
+            <view class="weui-flex__item" style="width:100%">
             
             <view class="book_content">{{bookObj.summary}}</view>
             
@@ -54,9 +60,13 @@
                 
             </view>
         </view>
-          
+
 
     </view>
+
+     <view class="weui-cells__fd"  wx:if="{{readerType== 'share'}}" >   </view>
+      <button class="placeholder_button"  wx:if="{{readerType== 'share'}}"   type="primary" bindtap="goindex">  返回首页 </button>
+      
      <view class="weui-cells__fd">   </view>
 </view>
 

@@ -21,7 +21,7 @@
     <view class="weui-panel weui-panel_access" wx:if="{{books.length > 0}}">
         <view class="weui-panel__bd">
             <block wx:for="{{books}}" wx:for-index="idx"  wx:key="*this">
-                <view  class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" data-bid="{{item.bid}}" bindtap="viewTap">
+                <view  class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" data-bid="{{item.id}}" bindtap="viewTap">
                     <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
                         <image class="weui-media-box__thumb" src="{{item.headImage}}" />
                     </view><!-- weui-media-box__hd_in-appmsg end -->

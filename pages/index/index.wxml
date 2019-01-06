@@ -26,7 +26,7 @@
             <view class="weui-tab__panel">
                 <view class="weui-tab__content" hidden="{{activeIndex != 0}}" >  
                     <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}%;" class="list" bindscrolltolower="bindDownLoadOne" > 
-                        <block wx:for="{{readNowObj.readObjs}}" wx:key="*this">
+                        <block wx:for="{{readNowObj.readObjs}}" wx:key="id">
                             <view  class="book-grid" data-id='{{item.id}}'  data-info='{{item}}' bindtap="powerNavDrawer" data-statu="open" hover-class="book-grid_active">
                                 <image class="book-grid__icon"   src="{{item.headImage}}" />
                                 <view class="book-grid__label">{{item.title}} </view>
@@ -36,7 +36,7 @@
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
                     <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}%;" class="list" bindscrolltolower="bindDownLoadTwo" > 
-                        <block wx:for="{{readNoObj.readObjs}}" wx:key="*this">
+                        <block wx:for="{{readNoObj.readObjs}}" wx:key="id">
                             <view  class="book-grid" data-id='{{item.id}}' data-info='{{item}}' bindtap="powerNavDrawer" data-statu="open" hover-class="book-grid_active">
                                 <image class="book-grid__icon"   src="{{item.headImage}}" />
                                 <view class="book-grid__label">{{item.title}} </view>
@@ -46,7 +46,7 @@
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
                     <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}%;" class="list" bindscrolltolower="bindDownLoadThree" > 
-                        <block wx:for="{{readFinishObj.readObjs}}" wx:key="*this">
+                        <block wx:for="{{readFinishObj.readObjs}}" wx:key="id">
                             <view  class="book-grid" data-id='{{item.id}}' data-info='{{item}}' bindtap="powerNavDrawer" data-statu="open" hover-class="book-grid_active">
                                 <image class="book-grid__icon"   src="{{item.headImage}}" />
                                 <view class="book-grid__label">{{item.title}} </view>
@@ -56,9 +56,13 @@
                 </view>
                 <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
                    <scroll-view scroll-top="{{scrollTop}}" scroll-y="true" style="height:{{scrollHeight}}%;" class="list" bindscrolltolower="bindDownLoadFour" > 
-                        <block wx:for="{{readAllObj.readObjs}}" wx:key="*this">
+                        <block wx:for="{{readAllObj.readObjs}}" wx:key="id">
                             <view  class="book-grid" data-id='{{item.id}}' data-info='{{item}}' bindtap="powerNavDrawer" data-statu="open" hover-class="book-grid_active">
+                                 <view class="book-grid-read book-grid-read-info" wx:if="{{item.isRead == 1}}">在读</view>
+                                <view class="book-grid-read book-grid-read-warn" wx:elif="{{item.isRead == 2}}">未读</view>
+                                <view class="book-grid-read book-grid-read-success" wx:elif="{{item.isRead == 3}}">已读</view>
                                 <image class="book-grid__icon"   src="{{item.headImage}}" />
+                               
                                 <view class="book-grid__label">{{item.title}} </view>
                             </view>
                         </block>

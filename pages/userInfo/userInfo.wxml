@@ -27,13 +27,24 @@
                 </navigator>
             
             </view> -->
-
-             <view class="weui-flex__item">
+           <view class="weui-flex__item">
+              <navigator url="../issues/issues" class="book-grid" data-id='1' hover-class="book-grid_active">
+                    <image class="book-grid__icon"   src="../../image/ico_issues.png" />
+                    <view class="book-grid__label">意见反馈</view>
+                </navigator>
+             </view>
+            <view class="weui-flex__item">
+              <navigator url="../about/about" class="book-grid" data-id='1' hover-class="book-grid_active">
+                    <image class="book-grid__icon"   src="../../image/ico_about.png" />
+                    <view class="book-grid__label">关于</view>
+                </navigator>
+             </view>
+             <!-- <view class="weui-flex__item">
               <navigator url="../setting/setting" class="book-grid" data-id='1' hover-class="book-grid_active">
                     <image class="book-grid__icon"   src="../../image/ico_config.png" />
                     <view class="book-grid__label">设置</view>
                 </navigator>
-             </view>
+             </view> -->
         </view>
        
      

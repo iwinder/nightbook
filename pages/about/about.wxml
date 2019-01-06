@@ -19,11 +19,26 @@
     <view class="weui-article__section">
        <view class="weui-article__title">作者</view>
         <view class="weui-article__section">
-            <view class="weui-article__h3">WindCoder：</view>
+            <view class="weui-article__h3">蜜汁炒酸奶：</view>
             <view class="weui-article__p weui-article__p_url">
                 https://windcoder.com/
             </view>
       </view>
+     </view>
+    <view class="weui-article__section">
+       <view class="weui-article__title">联系方式</view>
+        <view class="weui-article__section">
+            <view class="weui-article__h3">邮箱：</view>
+            <view class="weui-article__p weui-article__p_url">
+                windcoderz@foxmail.com
+            </view>
+        </view>
+         <view class="weui-article__section">
+            <view class="weui-article__h3">QQ群：</view>
+            <view class="weui-article__p weui-article__p_url">
+                371168889
+            </view>
+        </view>
      </view>
       <view class="weui-article__section">
        <view class="weui-article__title">注：</view>

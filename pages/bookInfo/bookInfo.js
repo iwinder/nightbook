@@ -17,40 +17,43 @@ Page({
     },
     readStatuss: ["在读", "未读", "已读"],
     readStatusIndex: 0,
+    readerType:"user",
+    isAuth: true
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    wx.showLoading({
+      title: '加载中',
+    })
     var bookid = options.bid;
-    console.log("bookid",bookid);
+    this.setData({
+      readerType:  options.type ? options.type : 'user'
+    });
+    // if(options.type == "share") {
+      this.getByShare();
+    // }
+    var logflag = (options.type && options.type == "share") ? false :true;
     var that = this;
     qyloud.request({
-      login: true,
+      login: logflag,
       url: config.service.apiUrlhead +bookid,
       data: {
         
       },
       success: function (res) { 
         wx.hideLoading();
-        console.log("res",res)
-        // if (res.data.code>0){
           that.setData({
             bookObj : res.data,
           });
-          
-        // }else{
-        //   wx.showToast({
-        //     title: res.data.msg,
-        //     duration: 2000
-        //   })
-        // }
       },
       fail: function (err) {
         wx.hideLoading();
         wx.showToast({
-          title: err.message.toString(),
+          title: err.message,
+          icon: 'none',
           duration: 2000
         })
       }
@@ -103,6 +106,26 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+    
+    return {
+      title: "《"+  this.data.bookObj.title+"》这本书还不错，也推荐给你",
+      path: "/pages/bookInfo/bookInfo?bid="+this.data.bookObj.id+"&type=share",
+      success: function (res) {
+        // 转发成功
+        wx.reportAnalytics('share', {
+          page: "bookInfo",
+          flag: "success"
+        })
+      },
+      fail: function (res) {
+        // 转发失败
+        wx.reportAnalytics('share', {
+          page: "bookInfo",
+          flag: "fail"
+
+        })
+      }
+    }
     
   },
   buttonTap: function (e) {
@@ -159,12 +182,12 @@ Page({
         wx.showLoading({
           title: '加载中',
         })
-        wcloud.request({
+        qyloud.request({
           login: true,
           url: config.service.apiUrlhead + "addReadStatus",
           data: {
-            bid: that.data.addBookObj.info.bid,
-            readStatus: newReadStatus
+            bookId: that.data.addBookObj.info.id,
+            isRead: newReadStatus
           },
           success: function (response) {
             wx.hideLoading();
@@ -177,27 +200,24 @@ Page({
           fail: function (err) {
             wx.hideLoading();
             wx.showToast({
-              title: err.errMsg,
+              title: err.message,
+              icon: 'none',
               duration: 2000
             })
           }
-        });//wcloud.request end
+        });//qyloud.request end
         wx.hideLoading();
 
-        this.setData(
-          {
+        this.setData({
             showModalStatus: false
-          }
-        );
+          });
       }//confirm
     }.bind(this), 200)
     // 显示  
     if (currentStatu == "open") {
-      this.setData(
-        {
+      this.setData({
           showModalStatus: true
-        }
-      );
+      });
     }
 
 
@@ -220,4 +240,60 @@ Page({
       "addBookObj.newReadStatus": parseInt(e.detail.value) + 1,
     })
   },
+  getByShare:function(){
+     // 获取用户信息
+     wx.getSetting({
+      success: res => {
+        if (!res.authSetting['scope.userInfo']) {
+          // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
+            this.setData({
+              isAuth:  false
+            });
+        }else {
+          this.setData({
+            isAuth:  true
+          });
+        }
+      }
+    })
+  },
+   /**
+   *  登录授权Button事件
+   * @param {*} e 
+   */
+  getUserInfo: function(e) {
+    if(e.detail.userInfo) {
+      let that = this;
+      wx.showLoading({
+        title: '加载中',
+      })
+      qyloud.login({ success: doRequest, fail: callFail });
+      function doRequest(successda) {
+        wx.hideLoading();
+        // app.globalData.userInfo = e.detail.userInfo;
+        that.setData({
+          // userInfo: successda,
+          isAuth: true
+        })
+        var tmp = {};
+        tmp.currentTarget.id = this.bookObj.info.id;
+        this.buttonTap(tmp);
+      }
+      function callFail(err){
+        console("getUserInfo",err);
+        wx.hideLoading();
+        wx.showToast({
+          title: err.message,
+          icon: 'none',
+          duration: 2000
+        })
+      }
+
+    }
+  }, 
+  goindex:function(e){
+    wx.reLaunch({
+      url: '/pages/index/index'
+    });
+  }
 })

@@ -1,5 +1,12 @@
+page{
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
 .page{
  background-color: #EBEBEB;
+ height: 100%;
 }
 .placeholder{
     margin: 5px;
@@ -10,11 +17,13 @@
     line-height: 2.3em;
     color: #cfcfcf;
 }
+.page__bd_spacing {
+  background-color:#EBEBEB;
+}
 .book_content{
- padding:0 10px;
-background-color:#ffffff;
-
-
+  padding:10px;
+  background-color:#ffffff;
+  text-indent:2rem;
 }
 
 @font-face {
@@ -51,7 +60,7 @@ background-color:#ffffff;
 .weui-cells__hd{
   padding-top:10px;
 padding-bottom:10px;
-margin-top:.77em;
+/* margin-top:.77em; */
 margin-bottom:.3em;
 padding-left:15px;
 padding-right:15px;
@@ -61,11 +70,13 @@ font-size:14px;
 .weui-cells__fd{
   padding-top:10px;
 padding-bottom:10px;
-margin-top:.77em;
+/* margin-top:.77em; */
 padding-left:15px;
 padding-right:15px;
 color:#999;
 font-size:14px;
+background-color:#EBEBEB;
+
 }
 .book_hd,.book_foot{
   

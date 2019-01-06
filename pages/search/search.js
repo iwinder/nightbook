@@ -118,6 +118,9 @@ Page({
   },
 
   findBookInfo:function(){
+    wx.showLoading({
+      title: '加载中',
+    })
     var data = {
       keys: this.data.inputVal,
       start: this.data.pageObj.start,
@@ -140,14 +143,18 @@ Page({
           that.countPage(res.data.result.pageInfo);
         } else {
           wx.showToast({
-            title: res.toString(),
+            title: res.toString,
+            icon: 'none',
+            duration: 2000
           })
         }
       },
       fail: function (err) {
         wx.hideLoading()
         wx.showToast({
-          title: err.toString(),
+          title: err.message,
+          icon: 'none',
+          duration: 2000
         })
       }
     })
@@ -166,8 +173,6 @@ Page({
   buttonTap:function(e){
     var id = e.currentTarget.id;
     var obj = this.data.books[id];
-    // console.log("buttonTap",e);
-    // console.log("buttonTap obj",obj);
     this.setData({
       'addBookObj.info': obj,  
       readStatusIndex: 0,
@@ -214,7 +219,7 @@ Page({
       //
       if (currentStatu == "confirm") {
         var newReadStatus = this.data.addBookObj.newReadStatus;
-        var oldReadStatus = this.data.addBookObj.oldReadStatus;
+        // var oldReadStatus = this.data.addBookObj.oldReadStatus;
         var that = this;
           //不同，更新
           wx.showLoading({
@@ -238,11 +243,13 @@ Page({
             fail: function (err) {
               wx.hideLoading();
               wx.showToast({
-                title: err.toString(),
+                title: err.message,
+                icon: 'none',
+                duration: 2000
               })
             }
           });//wcloud.request end
-          wx.hideLoading();
+          
      
         this.setData(
           {
