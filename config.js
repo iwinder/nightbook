@@ -1,7 +1,7 @@
 // var host = 'https://book.windcoder.com/nightbook';
 // var host = 'http://localhost:8080';
-var host = 'http://localhost:8000';
-// var host = 'https://book.eibook.net/nightbook';
+// var host = 'http://localhost:8000';
+var host = 'https://book.eibook.net/nightbook';
 var config = {
   pid:1,
   // 下面的地址配合云端 Demo 工作
