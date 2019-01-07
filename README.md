@@ -16,7 +16,7 @@
 - 修改报错及提示方式。
 - 完全重构后端，将原框架改为gradle+springBoot1.5.x+hibernate+jpa+mybatis实现
 
-### 2017.10.28 1.0
+### 2017.10.28 [1.0](https://github.com/iwinder/ShenYeShuJia-XiaoChengXuDuan)
 
 - 用户授权登录
 - 书籍搜索
