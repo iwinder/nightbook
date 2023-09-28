@@ -1,0 +1,8 @@
+apply plugin: 'eclipse-wtp'
+apply plugin: 'idea'
+
+
+
+dependencies {
+    compile project(':book-mina:mina-provider')
+}

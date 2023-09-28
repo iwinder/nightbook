@@ -1,0 +1,5 @@
+rootProject.name = 'nightbook'
+
+include 'book-core:common'
+include 'book-mina:mina-provider'
+include 'book-mina:mina-consumer'

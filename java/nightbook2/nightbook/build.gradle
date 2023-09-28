@@ -1,0 +1,83 @@
+buildscript {
+    ext {
+        springBootVersion = "1.5.8.RELEASE"
+    }
+    repositories {
+        mavenCentral()
+        maven { url "https://repo.spring.io/plugins-release" }
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+allprojects {
+    group 'com.windcoder'
+    version '2.0-SNAPSHOT'
+
+    apply plugin: 'java'
+    apply plugin: 'war'
+
+    apply plugin: 'org.springframework.boot'
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    [compileJava,compileTestJava,javadoc]*.options*.encoding = 'UTF-8'
+
+    configurations {
+        providedRuntime
+
+    }
+    repositories {
+        maven{url 'http://maven.aliyun.com/nexus/content/groups/public/'}
+    }
+    dependencies {
+        compile fileTree(dir: 'lib', exclude:'', include: '*.jar')
+    }
+}
+
+subprojects {
+
+    sourceSets {
+        main {
+            java{
+                srcDir 'src/main/java'
+            }
+            resources {
+                srcDir 'src/main/java'
+                srcDir 'src/main/resource'
+            }
+        }
+    }
+
+    bootRepackage.enabled=false
+}
+
+configure(rootProject) {
+    apply plugin: 'eclipse'
+    apply plugin: 'idea'
+    apply plugin: 'maven'
+
+    bootRepackage.enabled=true
+
+    springBoot {
+        mainClass = "com.windcoder.nigthbook.BookApplication";
+        buildInfo()
+    }
+    dependencies {
+        compile project(":book-mina:mina-consumer")
+    }
+
+    // 生成war时过滤内嵌tomcat依赖
+    war {
+
+        rootSpec.exclude("tomcat-embed*.jar")
+        rootSpec.exclude("javax.servlet-api*.jar")
+        rootSpec.exclude("org.projectlombok:lombok")
+    }
+}
+
+
+
+
