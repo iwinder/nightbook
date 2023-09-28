@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="UserBook">
+
+    <!-- 会员模型 -->
+    <resultMap type="com.windcoder.nightbook.entity.UserBook" id="userBook">
+        <id column="id" property="id"/>
+        <result column="uuid" property="uuid"/>
+        <result column="bid" property="bid"/>
+        <result column="isbn" property="isbn"/>
+        <result column="readStatus" property="readStatus"/>
+        <result column="deleteStatus" property="deleteStatus"/>
+        <result column="createtime" property="createtime"/>
+    </resultMap>
+
+    <resultMap type="com.windcoder.nightbook.entity.UserBookInfo" id="userBookInfo">
+        <id column="id" property="id"/>
+        <result column="title" property="title"/>
+        <result column="author" property="author"/>
+        <result column="headImage" property="headImage"/>
+        <result column="uuid" property="uuid"/>
+        <result column="bid" property="bid"/>
+        <result column="isbn" property="isbn"/>
+
+        <result column="readStatus" property="readStatus"/>
+        <result column="deleteStatus" property="deleteStatus"/>
+        <result column="updatetime" property="updatetime"/>
+        <result column="createtime" property="createtime"/>
+    </resultMap>
+    <resultMap id="userBookCount" type="com.windcoder.nightbook.entity.UserBookCount">
+        <result column="countNum" property="countNum"/>
+        <result column="readStatus" property="readStatus"/>
+    </resultMap>
+
+    <sql id="allColumn">
+        id,uuid,bid,isbn,readStatus,deleteStatus,updatetime,createtime
+    </sql>
+    <sql id="noIdColumn">
+        uuid,bid,isbn,readStatus,deleteStatus,updatetime,createtime
+    </sql>
+
+    <insert id="addUserBook" keyProperty="id" useGeneratedKeys="true" >
+        INSERT IGNORE INTO `user_book`(<include refid="noIdColumn" />)
+        VALUES (#{uuid},#{bid},#{isbn},#{readStatus},#{deleteStatus},#{updatetime},#{createtime});
+    </insert>
+
+    <!-- 查询 -->
+    <select id="findUserBookInfoByUidAndIsBn" resultMap="userBookInfo">
+        SELECT ub.id,b.bid,b.title,b.author,b.headImage,ub.readStatus,ub.deleteStatus FROM `book_info` b,user_book ub
+        WHERE ub.isbn=#{isbn} AND ub.uuid = #{uuid} AND ub.isbn = b.isbn
+        LIMIT 1;
+    </select>
+
+    <select id="findUserBookHasOrNot" resultType="Integer">
+        SELECT COUNT(*) FROM user_book ub
+        WHERE  ub.uuid = #{uuid} AND ub.bid = #{bid};
+    </select>
+    <!-- 查询 -->
+    <select id="findUserBookInfoListByUidOfPage" resultMap="userBookInfo">
+        SELECT ub.id,b.bid,b.title,b.author,b.headImage,ub.readStatus,ub.deleteStatus FROM `book_info` b,user_book ub
+        <where>
+            ub.uuid = #{e.uuid} AND ub.bid = b.bid
+            <if test=" e.readStatus &gt; 0">
+              AND  ub.readStatus = #{e.readStatus}
+            </if>
+        </where>
+        ORDER BY ub.updatetime DESC, ub.createtime DESC
+        <include refid="publicMapper.pageEnd"/>;
+    </select>
+
+    <select id="findUserBookInfoListByUidOfPageCount" resultType="int">
+        SELECT COUNT(*) FROM user_book ub
+        <where>
+            ub.uuid = #{e.uuid}
+            <if test=" e.readStatus &gt; 0">
+                AND  ub.readStatus = #{e.readStatus}
+            </if>
+        </where>;
+    </select>
+
+    <select id="updateReadStatusById">
+        UPDATE user_book SET readStatus = #{readStatus},updatetime = #{updatetime} WHERE id = #{id};
+    </select>
+
+
+    <select id="updateDeleteStatusById">
+        UPDATE user_book SET deleteStatus = #{deleteStatus} WHERE id = #{id};
+    </select>
+
+    <select id="findByUserBookNum"  resultMap="userBookCount">
+        SELECT COUNT(*) countNum,readStatus
+        FROM user_book
+        WHERE uuid=#{uuid} GROUP BY readStatus;
+    </select>
+
+</mapper>

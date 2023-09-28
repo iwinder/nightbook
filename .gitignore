@@ -1,0 +1,25 @@
+.idea
+/.idea
+.gradle
+**/build/
+
+# eclipse project files
+.classpath
+.project
+.settings
+**/bin/
+
+
+# idea project files
+*.iml
+*.ipr
+*.iws
+**/out
+
+#vscode
+.vscode
+.editorconfig
+/bin/
+
+
+/target

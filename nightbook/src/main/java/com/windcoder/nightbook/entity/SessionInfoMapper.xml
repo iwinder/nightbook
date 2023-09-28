@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="SessionInfo">
+
+    <!-- 会员模型 -->
+    <resultMap type="com.windcoder.nightbook.entity.SessionInfo" id="sessionInfo">
+        <id column="id" property="id"/>
+        <result column="pid" property="pid"/>
+        <result column="uuid" property="uuid"/>
+        <result column="skey" property="skey"/>
+        <result column="create_time" property="createTime"/>
+        <result column="last_visit_time" property="lastVisitTime"/>
+        <result column="open_id" property="openId"/>
+        <result column="session_key" property="sessionKey"/>
+        <result column="user_info" property="userInfo"/>
+    </resultMap>
+
+    <sql id="allColumns">
+        id,uuid,pid, skey,create_time,last_visit_time,open_id,session_key,user_info
+    </sql>
+    <insert id="addSessionInfo">
+        INSERT IGNORE INTO `capp_session_info`
+        (uuid,pid, skey,create_time,last_visit_time,open_id,session_key,user_info)
+        VALUES
+        ( #{uuid},#{pid},#{skey}, #{createTime},#{lastVisitTime},#{openId},#{sessionKey},#{userInfo} );
+    </insert>
+
+    <update id="updateSessionInfoByUid">
+        UPDATE `capp_session_info`
+        SET session_key =#{sessionKey},
+            create_time = #{createTime},
+            last_visit_time = #{lastVisitTime},
+            skey = #{skey},
+            user_info = #{userInfo}
+        WHERE uuid = #{uuid};
+    </update>
+    <update id="updatecapp_session_infoTime">
+        UPDATE `capp_session_info`
+        SET last_visit_time = #{lastVisitTime}
+        WHERE uuid = #{uuid};
+    </update>
+    <!-- 查询 -->
+    <select id="findSessionByPidAndOpenId" resultMap="sessionInfo">
+        SELECT <include refid="allColumns" />FROM `capp_session_info`
+        WHERE pid=#{pid} AND open_id = #{openId} LIMIT 1;
+    </select>
+    <select id="findSessionByUuidAndSkey" resultMap="sessionInfo">
+        SELECT <include refid="allColumns" />FROM `capp_session_info`
+        WHERE uuid=#{uuid} AND skey = #{skey} LIMIT 1;
+    </select>
+
+    <!--<select id="findByUsername" resultMap="user">-->
+        <!--SELECT id,username,password,salt FROM `capp_session_info` WHERE username = #{username};-->
+    <!--</select>-->
+
+    <!--<select id="findUidByUsername" resultMap="user">-->
+        <!--SELECT id  FROM `capp_session_info` WHERE username = #{username};-->
+    <!--</select>-->
+
+    <!--<select id="findAllRoleIdByUsername" resultType="long">-->
+        <!--SELECT roleId FROM `capp_session_info` WHERE userId IN-->
+       <!--( SELECT id  FROM `user` WHERE username = #{username});-->
+    <!--</select>-->
+</mapper>

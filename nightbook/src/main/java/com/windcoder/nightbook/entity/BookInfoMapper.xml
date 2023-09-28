@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="BookInfo">
+
+    <!-- 会员模型 -->
+    <resultMap type="com.windcoder.nightbook.entity.BookInfo" id="bookInfo">
+        <id column="bid" property="bid"/>
+        <result column="title" property="title"/>
+        <result column="originTitle" property="originTitle"/>
+        <result column="author" property="author"/>
+        <result column="translator" property="translator"/>
+        <result column="headImage" property="headImage"/>
+        <result column="summary" property="summary"/>
+        <result column="price" property="price"/>
+        <result column="isbn" property="isbn"/>
+        <result column="publisher" property="publisher"/>
+        <result column="pubdate" property="pubdate"/>
+        <result column="pages" property="pages"/>
+        <result column="average" property="average"/>
+        <result column="createtime" property="createtime"/>
+    </resultMap>
+
+    <sql id="allColumn">
+        bid,title,originTitle,author,translator,headImage,summary,price,isbn,publisher,pubdate,pages,average,createtime
+    </sql>
+    <sql id="noIdColumn">
+        title,originTitle,author,translator,headImage,summary,price,isbn,publisher,pubdate,pages,average,createtime
+    </sql>
+    <sql id="BookInfoColumn">
+        bid,title,originTitle,author,translator,headImage,summary,price,isbn,publisher,pubdate,pages,average
+    </sql>
+
+    <insert id="addBookInfo" keyProperty="bid" useGeneratedKeys="true" >
+        INSERT IGNORE INTO `book_info`(<include refid="noIdColumn" />)
+        VALUES (#{title},#{originTitle},#{author},#{translator},#{headImage},#{summary},#{price},#{isbn},#{publisher},#{pubdate},#{pages},#{average},#{createtime});
+    </insert>
+    <!-- 查询 -->
+    <select id="findBookInfoBaseByIsbn" resultMap="bookInfo">
+        SELECT bid,title,author,headImage FROM `book_info`
+        WHERE isbn=#{isbn} LIMIT 1;
+    </select>
+
+    <select id="findBidByIsbn" resultType="Integer">
+        SELECT bid FROM `book_info`
+        WHERE isbn=#{isbn} LIMIT 1;
+    </select>
+
+    <select id="findIsbnByBid" resultType="String">
+        SELECT isbn FROM `book_info`
+        WHERE bid=#{bid} LIMIT 1;
+    </select>
+
+    <select id="findBookInfoByBid" resultMap="bookInfo">
+        SELECT <include refid="BookInfoColumn"/> FROM `book_info`
+        WHERE bid=#{bid} LIMIT 1;
+    </select>
+
+</mapper>

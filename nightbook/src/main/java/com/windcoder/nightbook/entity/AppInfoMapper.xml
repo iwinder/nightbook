@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.windcoder.nightbook.entity.AppInfo">
+
+    <!-- 会员模型 -->
+    <resultMap type="com.windcoder.nightbook.entity.AppInfo" id="appInfo">
+        <id column="pid" property="pid"/>
+        <result column="appsecret" property="secret"/>
+        <result column="appid" property="appid"/>
+        <result column="login_duration" property="loginDuration"/>
+        <result column="session_duration" property="sessionDuration"/>
+        <result column="createtime" property="createtime"/>
+    </resultMap>
+
+    <insert id="addUser">
+        INSERT IGNORE INTO `cappinfo`(appid,appsecret, pid,login_duration,session_duration,createtime) VALUES (#{appid}, #{secret},#{pid},#{loginDuration}, #{sessionDuration},#{createtime});
+    </insert>
+    <!-- 查询 -->
+    <select id="findAppInfoByPid" resultMap="appInfo">
+        SELECT appid,appsecret,pid,login_duration,session_duration FROM `capp_info`
+        WHERE pid=#{pid} LIMIT 1;
+    </select>
+
+    <!--<select id="findByUsername" resultMap="user">-->
+        <!--SELECT id,username,password,salt FROM `cAppInfo` WHERE username = #{username};-->
+    <!--</select>-->
+
+    <!--<select id="findUidByUsername" resultMap="user">-->
+        <!--SELECT id  FROM `cAppInfo` WHERE username = #{username};-->
+    <!--</select>-->
+
+    <!--<select id="findAllRoleIdByUsername" resultType="long">-->
+        <!--SELECT roleId FROM `cAppInfo` WHERE userId IN-->
+       <!--( SELECT id  FROM `user` WHERE username = #{username});-->
+    <!--</select>-->
+</mapper>
