@@ -1,11 +1,76 @@
-package com.windcoder.nightbook.common.utils.douBan;
+package com.windcoder.common.utills;
 
-import com.windcoder.nightbook.common.entity.Book;
+import com.windcoder.common.utills.https.HttpsUtil;
+import com.windcoder.nightbook.entity.BookInfo;
+import com.windcoder.nightbook.entity.BookSearch;
+import com.windcoder.nightbook.services.impl.BookInfoSericeImpl;
+import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
-public class DouBanUtilTest {
+/**
+ * Description:
+ * User: WindCoder
+ * Date: 2017-10-17
+ * Time: 23:16 下午
+ */
+public class DouBanUtils {
+    public static final String ISBNURL = "https://api.douban.com/v2/book/isbn/";
+    public static final String TAGURL = "https://api.douban.com/v2/book/search";
+
+
+
+
+
+    public static List<BookInfo> JsonArryToBookeInfo(JSONObject j){
+        List<BookInfo> bookInfos = new ArrayList<BookInfo>();
+        if(j.has("books")){
+            JSONArray books = j.getJSONArray("books");
+            int booksLwen = books.length();
+            for (int i=0;i<booksLwen;i++){
+                bookInfos.add(JsonToBookeInfo(books.getJSONObject(i)));
+            }
+        }
+        return bookInfos;
+    }
+    public static BookInfo JsonToBookeInfo(JSONObject j){
+        if(j.has("title")) {
+            BookInfo bookInfo = new BookInfo();
+            bookInfo.setTitle(j.getString("title"));
+            bookInfo.setOriginTitle(j.getString("origin_title"));
+            bookInfo.setAuthor(JsonArryToString(j.getJSONArray("author")));
+            bookInfo.setTranslator( JsonArryToString(j.getJSONArray("translator")));
+            bookInfo.setHeadImage(j.getString("image"));
+            bookInfo.setSummary(j.getString("summary"));
+            bookInfo.setPrice(j.getString("price"));
+            bookInfo.setIsbn(j.getString("isbn13"));
+            bookInfo.setPublisher(j.getString("publisher"));
+            bookInfo.setPubdate(j.getString("pubdate"));
+            bookInfo.setPages(j.getString("pages"));
+            bookInfo.setAverage(j.getJSONObject("rating").getString("average"));
+            return bookInfo;
+        }
+
+        return null;
+    }
+
+    public static String JsonArryToString(JSONArray jsonArray){
+        StringBuffer str = new StringBuffer();
+        int len = jsonArray.length();
+        int tmpLen = len-1;
+        for (int i =0;i<len;i++){
+            str.append(jsonArray.get(i));
+            if (i!=tmpLen){
+                str.append(" / ");
+            }
+        }
+        return str.toString();
+    }
+
+
+
 
     public static void  findBookInfoFromDouBanByKyesTest(){
         String s = "{\n" +
@@ -712,11 +777,11 @@ public class DouBanUtilTest {
                 "}";
 
         JSONObject j = new JSONObject(s);
-        List<Book> bookInfos = DouBanUtils.JsonArryToBookeInfo(j);
+        List<BookInfo> bookInfos = DouBanUtils.JsonArryToBookeInfo(j);
 
         System.out.println(bookInfos.toString());
     }
-    public static Book findBookInfoFromDouBanByISBNTest(String isbn){
+    public static BookInfo findBookInfoFromDouBanByISBNTest(String isbn){
         String s = "{\n" +
                 "rating: {\n" +
                 "max: 10,\n" +
@@ -944,4 +1009,5 @@ public class DouBanUtilTest {
 //        b.findBookInfoFromDouBanByISBNTest("1");
 //        findBookInfoFromDouBanByKyesTest();
     }
+
 }

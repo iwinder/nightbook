@@ -1,4 +1,4 @@
-package com.windcoder.nightbook.common.utils.https;
+package com.windcoder.common.utills.https;
 
 import javax.net.ssl.X509TrustManager;
 import java.security.cert.CertificateException;

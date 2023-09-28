@@ -1,4 +1,4 @@
-package com.windcoder.nightbook.common.utils;
+package com.windcoder.common.utills;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Base64;

@@ -1,10 +1,10 @@
-package com.windcoder.nightbook.common.utils;
+package com.windcoder.common.utills;
 
 /**
  * Created by wind on 2016/12/23.
  */
 public class ReturnCodeUtil {
-    public static final Integer MA_OK 					              = 200;       //成功返回码
+    public static final Integer MA_OK 					              = 0;       //成功返回码
     public static final Integer  MA_MYSQL_ERR                         = 1001;    // Mysql错误等
     public static final Integer  MA_NO_INTERFACE                      = 1002;    // 接口参数不存在
     public static final Integer MA_PARA_ERR                           = 1003;    //参数错误
@@ -24,5 +24,4 @@ public class ReturnCodeUtil {
     public static final Integer MA_NO_APPID                           = 1012;    //不能获取AppID
     public static final Integer MA_INIT_APPINFO_ERR                   = 1013;    //初始化AppID失败
 
-    public static final Integer MA_DATA_NULL                          = 404;   //数据不存在
 }
