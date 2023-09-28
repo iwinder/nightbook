@@ -1,0 +1,22 @@
+<view class="page" xmlns:wx="http://www.w3.org/1999/xhtml">
+    <view class="page__hd">
+        
+    </view>
+    <view class="page__bd">
+<form bindsubmit="formSubmit" bindreset="formReset">
+ <view class="weui-cells__title">ISSUES:</view>
+<view class="weui-cells weui-cells_after-title">
+            <view class="weui-cell">
+                <view class="weui-cell__bd">
+                    <textarea class="weui-textarea" placeholder="请输入文本" style="height: 3.3em"  value="{{inputVal}}" maxlength="{{maxLen}}" bindinput="inputConfirm" />
+                    <view class="weui-textarea-counter">{{nowlen}}/{{maxLen}}</view>
+                </view>
+            </view>
+        </view>
+
+         <view class="weui-btn-area">
+            <button class="weui-btn" disabled="{{butnFlag}}" type="primary" bindtap="butnOk">确定</button>
+        </view>
+        </form>
+    </view>
+    </view>

@@ -1,0 +1,39 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/userInfo/userInfo",
+    "pages/bookInfo/bookInfo",
+    "pages/search/search",
+    "pages/statistics/statistics",
+    "pages/issues/issues",
+    "pages/about/about",
+    "pages/setting/setting"
+
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#fff",
+    "navigationBarTitleText": "深夜书架",
+    "navigationBarTextStyle":"black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "image/ico_index.png",
+        "selectedIconPath": "image/ico_index_selected.png"
+      },
+      {
+        "pagePath": "pages/userInfo/userInfo",
+        "text": "我的",
+        "iconPath": "image/ico_userInfo.png",
+        "selectedIconPath": "image/ico_userInfo_selected.png"
+      }
+    ],
+    "color": "#bfbfbf",
+    "selectedColor": "#11cd6e",
+    "borderStyle": "white",
+    "position": "bottom"
+  }
+}

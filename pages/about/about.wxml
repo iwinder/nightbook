@@ -1,0 +1,55 @@
+<view class="page">
+  <view class="page__hd">
+          <view class="page__title">深夜书架</view>
+  </view>
+
+
+  <view class="page__bd">
+    <view class="weui-article">
+
+    <view class="weui-article__section">
+      <view class="weui-article__title">API支持</view>
+      <view class="weui-article__section">
+        <view class="weui-article__h3"> 豆瓣API：</view>
+        <view class="weui-article__p weui-article__p_url">
+          https://developers.douban.com
+        </view>
+      </view>
+    </view>
+    <view class="weui-article__section">
+       <view class="weui-article__title">作者</view>
+        <view class="weui-article__section">
+            <view class="weui-article__h3">蜜汁炒酸奶：</view>
+            <view class="weui-article__p weui-article__p_url">
+                https://windcoder.com/
+            </view>
+      </view>
+     </view>
+    <view class="weui-article__section">
+       <view class="weui-article__title">联系方式</view>
+        <view class="weui-article__section">
+            <view class="weui-article__h3">邮箱：</view>
+            <view class="weui-article__p weui-article__p_url">
+                windcoderz@foxmail.com
+            </view>
+        </view>
+         <view class="weui-article__section">
+            <view class="weui-article__h3">QQ群：</view>
+            <view class="weui-article__p weui-article__p_url">
+                371168889
+            </view>
+        </view>
+     </view>
+      <view class="weui-article__section">
+       <view class="weui-article__title">注：</view>
+        <view class="weui-article__section">
+            <view class="weui-article__p weui-article__p_url">
+                由于豆瓣APi每小时限额问题，可能导致查询效果失败，此时请过段时间重试。
+            </view>
+        </view>
+     </view>     
+            
+    </view> <!--weui-article end-->
+
+  </view> <!-- page__bd end-->
+</view>  <!--page end-->

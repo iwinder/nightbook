@@ -1,0 +1,103 @@
+<view class="page">
+    <view class="weui-cells__hd">   </view>
+    <view class="page__bd page__bd_spacing">
+
+        <view class="weui-flex book_hd">
+        
+            <view class='book_img_view'>
+            <image src='{{bookObj.headImage}}'  mode="aspectFit" class='book_img'></image>
+            </view>
+
+              <view class="weui-flex__item">
+              <view class="book_text_title  ">{{bookObj.title}}</view>
+              <view class="book_hd_text">出版社：{{bookObj.publisher}}</view>
+              <view class="book_hd_text">作者：{{bookObj.author}}</view>
+               <view class="book_hd_text">ISBN：{{bookObj.isbn}}</view>
+               <view class="book_hd_text" wx:if="{{bookObj.pages}}" >页数：{{bookObj.pages}}</view>
+                <view class="book_hd_text">豆瓣评分：{{bookObj.average}}</view>
+            </view>
+        </view>
+
+    <view class="weui-cells__hd">   </view>
+        <view class="weui-flex">
+            <view class="weui-flex__item">
+            <view class="book_addBtn_view">
+              <view class="book_addBtn" wx:if="{{bookObj.hasStatus}}">
+              <view>
+               <span class='iconfont icoAdd_selected'></span> <text class='textAdd_selected'>已在书架</text>
+               </view>
+              </view>
+              <block wx:else>
+                    <view class="book_addBtn" wx:if="{{isAuth}}" bindtap="buttonTap"    >
+                        <span class='iconfont icoAdd'></span> <text>加入书架</text>
+                    </view>
+                     <view class="book_addBtn" wx:elif="{{!isAuth}}"  >
+                       <button class="placeholder_button" type="warn" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 加入书架 </button>
+                    </view>
+              </block>
+  
+            </view>
+            
+            </view>
+            
+        </view>
+        <view class="weui-cells__title">内容简介</view>
+        <view class="weui-flex">
+            <view class="weui-flex__item" style="width:100%">
+            
+            <view class="book_content">{{bookObj.summary}}</view>
+            
+            </view>
+            
+        </view>
+        <view class="weui-cells__title ">其他信息</view>
+        <view class="weui-flex book_foot">
+          <view class="weui-flex__item">
+              <view class="book_hd_text" wx:if="{{bookObj.originTitle}}" >原作名：{{bookObj.originTitle}}</view>
+              <view class="book_hd_text" wx:if="{{bookObj.translator}}" >译者：{{bookObj.translator}}</view>
+              <view class="book_hd_text">出版日期：{{bookObj.pubdate}}</view>
+               <view class="book_hd_text">价格：{{bookObj.price}}</view>
+                
+            </view>
+        </view>
+
+
+    </view>
+
+     <view class="weui-cells__fd"  wx:if="{{readerType== 'share'}}" >   </view>
+      <button class="placeholder_button"  wx:if="{{readerType== 'share'}}"   type="primary" bindtap="goindex">  返回首页 </button>
+      
+     <view class="weui-cells__fd">   </view>
+</view>
+
+
+<!--mask-->  
+<view class="drawer_screen" bindtap="powerDrawer" data-statu="close" wx:if="{{showModalStatus}}"></view>  
+<!--content-->  
+<!--使用animation属性指定需要执行的动画-->  
+<view animation="{{animationData}}" class="drawer_box" wx:if="{{showModalStatus}}">  
+  <!--drawer content-->  
+  <view class="drawer_title"></view>  
+  <view class="drawer_content">  
+     <view class="weui-cell"> 
+      <image  class="book-grid__icon" src='{{addBookObj.info.headImage}}'></image>
+      
+    </view>
+     <view  class='book-cells__tips'>{{addBookObj.info.title}}</view>
+      <view  class='book-cells__tips'>{{addBookObj.info.author}} </view>
+      
+    <!-- <view  class='book-cells__tips'>已加入书架</view>   -->
+   <view class="book-cell weui-cell_select">
+      <view class="weui-cell__hd weui-cell__hd_in-select-after">
+                    <view class="weui-label">阅读状态</view>
+                </view>
+                <view class="weui-cell__bd">
+                    <picker bindchange="bindReadStatusChange" value="{{readStatusIndex}}" range="{{readStatuss}}">
+                        <view class="weui-select weui-select_in-select-after">{{readStatuss[readStatusIndex]}}</view>
+                    </picker>
+                </view>
+    </view>  
+    
+  </view>  
+  <view class="btn_ok" bindtap="powerDrawer" data-statu="confirm">确定</view>
+</view>  
