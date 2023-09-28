@@ -1,0 +1,23 @@
+.idea
+.gradle
+**/build/
+
+# eclipse project files
+.classpath
+.project
+.settings
+**/bin/
+
+
+# idea project files
+/target
+*.iml
+*.ipr
+*.iws
+**/out
+**/gradle
+
+#vscode
+.vscode
+/bin/
+.idea
